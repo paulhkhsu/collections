@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	<servlet>
+		<servlet-name>mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>mvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>rest</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>rest</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>accept-filter</filter-name>
+		<filter-class>
+			com.paul.filter.ReturnFormatFilter
+		</filter-class>
+		<init-param>
+			<param-name>keyword</param-name>
+			<param-value>fmt</param-value>
+		</init-param>
+		<init-param>
+			<param-name>xml</param-name>
+			<param-value>application/xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>json</param-name>
+			<param-value>application/json</param-value>
+		</init-param>
+		<init-param>
+			<param-name>default</param-name>
+			<param-value>application/xml</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>accept-filter</filter-name>
+		<url-pattern>/rest/*</url-pattern>
+	</filter-mapping>
+	
+</web-app>
